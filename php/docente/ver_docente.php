@@ -19,7 +19,7 @@ $resultado_nombres_docentes = mysqli_query($conn, $query_nombres_docentes);
 </head>
 <?php include('../pagina/header.php'); ?>
 
-<div class="col py-3">  
+<div class="col py-3">
     <form method="POST">
     </form>
     <h2>Lista de docentes</h2>
@@ -40,30 +40,28 @@ $resultado_nombres_docentes = mysqli_query($conn, $query_nombres_docentes);
             <th>Acciones</th>
         </tr>
         <?php
-                if(mysqli_num_rows($result) == 0){
-                    echo '<tr><td colspan="8">No hay datos.</td></tr>';
-                }else{
-                    $no = 1;
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo '
+        if (mysqli_num_rows($result) == 0) {
+            echo '<tr><td colspan="8">No hay datos.</td></tr>';
+        } else {
+            $no = 1;
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '
                         <tr>
-                            <td>'.$no.'</td>
-                            <td>'.$row['nombre_docente'].'</td>
-                            <td>'.$row['cedula_docente'].'</td>
-                            <td>'.$row['correo_docente'].'</td>
-                            <td>'.$row['telefono_docente'].'</td>
-                            <td>'.$row['especializacion_docente'].'</td>
-                            <td>'.$row['horas_clase_docente'].'</td>
+                            <td>' . $no . '</td>
+                            <td>' . $row['nombre_docente'] . '</td>
+                            <td>' . $row['cedula_docente'] . '</td>
+                            <td>' . $row['correo_docente'] . '</td>
+                            <td>' . $row['telefono_docente'] . '</td>
+                            <td>' . $row['especializacion_docente'] . '</td>
+                            <td>' . $row['horas_clase_docente'] . '</td>
                             <td>
-                                <a href="editar_docente.php?id='.$row['id_docente'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                <a href="index.php?aksi=delete&nik'.$row['id_docente'].'" title="Eliminar" onclick="return confirm(\'¿Estás seguro de borrar los datos de '.$row['nombre_docente'].'?\')" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                            </td>
+                            <a href="editar_docente.php?id='. $row['id_docente'] . '" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="eliminar_docente.php?id='. $row['id_docente'] . '" class="btn btn-danger btn-sm">Eliminar</a> </td>
                         </tr>
                         ';
-                        $no++;
-                    }
-                }
-                ?>
+                $no++;
+            }
+        }
+        ?>
     </table>
-<?php include('../pagina/footer.php'); ?>
-
+    <?php include('../pagina/footer.php'); ?>

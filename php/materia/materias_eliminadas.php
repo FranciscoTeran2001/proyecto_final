@@ -1,14 +1,14 @@
 <?php
 include("../conexion.php");
 
-// Consulta para obtener la lista de materias con el nombre de la carrera y estado igual a 1
-$sql = "SELECT m.id_materia, m.nombre_materia, m.codigo_materia, m.creditos_materia, m.horas_materias, m.id_carrera, c.nombre_carrera
+// Consulta para obtener las materias eliminadas con el nombre de la carrera
+$sql_eliminadas = "SELECT m.id_materia, m.nombre_materia, m.codigo_materia, m.creditos_materia, m.horas_materias, m.id_carrera, c.nombre_carrera
         FROM materia m
         INNER JOIN carrera c ON m.id_carrera = c.id_carrera
-        WHERE m.estado_materia = 1
+        WHERE m.estado_materia = 0
         ORDER BY m.id_materia ASC";
 
-$result = mysqli_query($conn, $sql);
+$result_eliminadas = mysqli_query($conn, $sql_eliminadas);
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +17,14 @@ $result = mysqli_query($conn, $sql);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ver Materias</title>
+    <title>Materias Eliminadas</title>
 </head>
 
 <?php include('../pagina/header.php'); ?>
 
 <div class="col py-3">  
     <div class="container">
-        <h2>Lista de Materias</h2>
+        <h2>Lista de Materias Eliminadas</h2>
         <hr />
 
         <table class="table table-striped table-hover">
@@ -37,10 +37,10 @@ $result = mysqli_query($conn, $sql);
                 <th>Acciones</th>
             </tr>
             <?php
-            if(mysqli_num_rows($result) == 0){
+            if(mysqli_num_rows($result_eliminadas) == 0){
                 echo '<tr><td colspan="6">No hay datos.</td></tr>';
             }else{
-                while($row = mysqli_fetch_assoc($result)){
+                while($row = mysqli_fetch_assoc($result_eliminadas)){
                     echo '
                     <tr>
                         <td>'.$row['nombre_materia'].'</td>
@@ -49,8 +49,7 @@ $result = mysqli_query($conn, $sql);
                         <td>'.$row['horas_materias'].'</td>
                         <td>'.$row['nombre_carrera'].'</td>
                         <td>
-                            <a href="editar_materia.php?id='.$row['id_materia'].'" class="btn btn-primary">Editar</a>
-                            <a href="eliminar_materia.php?id='.$row['id_materia'].'" class="btn btn-danger">Eliminar</a>
+                            <a href="restaurar_materia.php?id='.$row['id_materia'].'" class="btn btn-success">Restaurar</a>
                         </td>
                     </tr>
                     ';
@@ -61,5 +60,3 @@ $result = mysqli_query($conn, $sql);
     </div>
 
     <?php include('../pagina/footer.php'); ?>
-
-
