@@ -92,13 +92,13 @@
                             <a href="../nrc/ver_nrc.php" class="nav-link px-0">Ver NRC</a>
                         </li>
                         <li class="w-100">
-                            <a href="../nrc/add_nrc.php" class="nav-link px-0">agregar nrc</a>
+                            <a href="../nrc/nrc_eliminados.php" class="nav-link px-0">NRC eliminados</a>
                         </li>
                         <li class="w-100">
                             <a href="../periodo/ver_periodo.php" class="nav-link px-0">Ver periodo</a>
                         </li>
                         <li class="w-100">
-                            <a href="../periodo/add_periodo.php" class="nav-link px-0">agregar periodo</a>
+                            <a href="../periodo/periodos_eliminados.php" class="nav-link px-0">Periodos eliminados</a>
                         </li>
                     </ul>
                 </li>

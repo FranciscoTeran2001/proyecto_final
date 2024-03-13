@@ -1,35 +1,7 @@
 <?php
 include("../conexion.php");
 
-// Establecer la zona horaria a Guayaquil
 date_default_timezone_set('America/Guayaquil');
-
-// Definir una variable para almacenar el mensaje de actualización
-$update_message = '';
-
-// Verificar si se ha enviado el formulario de actualización
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $id_aula = $_POST['id_aula'];
-    $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
-    $capacidad = mysqli_real_escape_string($conn, $_POST["capacidad"]);
-    $bloque = mysqli_real_escape_string($conn, $_POST["bloque"]);
-
-    // Actualizar los datos del aula en la base de datos
-    $sql = "UPDATE aula 
-            SET nombre_aula = '$nombre', 
-                capacidad_aula = '$capacidad', 
-                bloque_aula = '$bloque' 
-            WHERE id_aula = $id_aula";
-
-    if (mysqli_query($conn, $sql)) {
-        // Establecer el mensaje de actualización exitosa
-        $update_message = 'El aula se ha actualizado correctamente.';
-    } else {
-        // Establecer el mensaje de error de actualización
-        $update_message = 'Error al actualizar el aula: ' . mysqli_error($conn);
-    }
-}
 
 // Verificar si se ha proporcionado un ID de aula válido en la URL
 if (isset($_GET['id'])) {
@@ -56,15 +28,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Aula</title>
-</head>
-<body>
+
     <div class="container">
         <h2>Editar Aula</h2>
         <hr />
@@ -77,7 +41,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de aula -->
-        <form method="post" action="">
+        <form method="post" action="update_aula.php">
             <input type="hidden" name="id_aula" value="<?php echo $id_aula; ?>">
 
             <div class="form-group">
@@ -95,10 +59,6 @@ if (isset($_GET['id'])) {
                     <option value="G" <?php if ($bloque == 'G') echo 'selected'; ?>>G</option>
                 </select>
             </div>
-
             <button type="submit" class="btn btn-primary">Actualizar Aula</button>
-            <a href="ver_aula.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>

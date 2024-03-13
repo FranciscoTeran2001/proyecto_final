@@ -9,33 +9,7 @@ $carreras = mysqli_fetch_all($result_carreras, MYSQLI_ASSOC);
 // Definir una variable para almacenar el mensaje de actualización
 $update_message = '';
 
-// Verificar si se ha enviado el formulario de actualización
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $id_materia = $_POST['id_materia'];
-    $nombre_materia = $_POST['nombre_materia'];
-    $codigo_materia = $_POST['codigo_materia'];
-    $creditos_materia = $_POST['creditos_materia'];
-    $horas_materias = $_POST['horas_materias'];
-    $id_carrera = $_POST['id_carrera'];
 
-    // Actualizar los datos de la materia en la base de datos
-    $sql = "UPDATE materia 
-            SET nombre_materia = '$nombre_materia', 
-                codigo_materia = '$codigo_materia', 
-                creditos_materia = '$creditos_materia', 
-                horas_materias = '$horas_materias', 
-                id_carrera = '$id_carrera' 
-            WHERE id_materia = $id_materia";
-
-    if (mysqli_query($conn, $sql)) {
-        // Establecer el mensaje de actualización exitosa
-        $update_message = 'La materia se ha actualizado correctamente.';
-    } else {
-        // Establecer el mensaje de error de actualización
-        $update_message = 'Error al actualizar la materia: ' . mysqli_error($conn);
-    }
-}
 
 // Verificar si se ha proporcionado un ID de materia válido en la URL
 if (isset($_GET['id'])) {
@@ -64,14 +38,6 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Materia</title>
-</head>
-<body>
     <div class="container">
         <h2>Editar Materia</h2>
         <hr />
@@ -84,7 +50,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de materia -->
-        <form method="post" action="">
+        <form method="post" action="update_materia.php">
             <input type="hidden" name="id_materia" value="<?php echo $id_materia; ?>">
 
             <div class="form-group">
@@ -118,6 +84,5 @@ if (isset($_GET['id'])) {
             <a href="ver_materias.php" class="btn btn-default">volver</a>
         </form>
     </div>
-</body>
-</html>
+
 
