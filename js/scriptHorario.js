@@ -1,6 +1,15 @@
+// Conjunto para almacenar los IDs de los NRCs agregados
+var nrcsAgregados = new Set();
+
 function crearDiv() {
     // Obtener el valor seleccionado del campo de selección
     var selectedNrc = document.getElementById("nrcSelect").value;
+
+    // Verificar si el NRC seleccionado ya está presente en la sección de detalles
+    if (nrcsAgregados.has(selectedNrc)) {
+        alert("Ya se ha agregado este NRC a la sección de detalles.");
+        return;
+    }
 
     // Crear un nuevo objeto XMLHttpRequest
     var xhr = new XMLHttpRequest();
@@ -22,7 +31,7 @@ function crearDiv() {
             // Obtener el código NRC correspondiente al ID NRC seleccionado
             var codigoNrc = document.querySelector("#nrcSelect option[value='" + selectedNrc + "']").textContent;
 
-            // Crear el div para los nrc
+            // Crear el div para los NRC
             var nrcDiv = document.createElement("div");
             nrcDiv.classList.add("nrc");
             nrcDiv.setAttribute("draggable", "true");
@@ -40,16 +49,21 @@ function crearDiv() {
             // Agregar el evento de clic al botón de eliminación
             closeButton.addEventListener('click', function () {
                 nuevoDiv.remove();
+                // Eliminar el NRC del conjunto de NRCs agregados
+                nrcsAgregados.delete(selectedNrc);
             });
 
             // Agregar el botón de eliminación al nuevo div
             nuevoDiv.appendChild(closeButton);
 
-            // Agregar el div de nrc al nuevo div
+            // Agregar el div del NRC al nuevo div
             nuevoDiv.appendChild(nrcDiv);
 
             // Agregar el nuevo div al documento
             document.getElementById("detalleNrc").appendChild(nuevoDiv);
+
+            // Agregar el ID del NRC al conjunto de NRCs agregados
+            nrcsAgregados.add(selectedNrc);
         }
     };
 
