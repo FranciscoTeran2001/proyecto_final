@@ -62,7 +62,7 @@
                                 ?>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="crearDiv()">Crear Div</button>
+                        <button type="button" class="btn btn-warning" onclick="crearDiv()" style="margin-top:3%;">Crear Bloque NRC</button>
                     </form>
                 </div>
             </div>

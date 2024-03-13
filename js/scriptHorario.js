@@ -99,6 +99,12 @@ function dragLeave() {
 }
 
 function drop() {
+    // Verificar si ya hay un div dentro de la sección objetivo
+    if (this.querySelector('.nrc')) {
+        // Si ya hay un div, no hacer nada
+        return;
+    }
+
     // Create a new div for the dropped NRC 
     const nrcDiv = document.createElement('div');
     nrcDiv.classList.add('nrc');
