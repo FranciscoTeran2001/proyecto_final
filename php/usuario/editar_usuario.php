@@ -50,7 +50,6 @@ if (isset($_GET['id'])) {
             </div>
 
             <button type="submit" class="btn btn-primary" name="Actualizar">Actualizar Usuario</button>
-            <a href="ver_usuarios.php" class="btn btn-default">Volver</a>
         </form>
     </div>
 
