@@ -23,8 +23,8 @@ $result = mysqli_query($conn, $sql);
     <h2>Lista de docentes</h2>
     <hr />
     <div class="col-sm-6">
-        <a href="#addDocenteModal" class="btn btn-success" data-toggle="modal">
-            <i class="material-icons">&#xE147;</i><span>Añadir Nuevo Docente</span></a>
+        <a data-url = "add_docente.php  " class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal" >
+            <i class="material-icons ">&#xE147;</i><span>Añadir Nuevo Docente</span></a>
     </div>
     <table class="table table-striped table-hover">
         <tr>
