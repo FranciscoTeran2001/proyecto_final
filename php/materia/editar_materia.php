@@ -52,7 +52,8 @@ $update_message = '';
         // Establecer el mensaje de error de actualización
         $update_message = 'Error al actualizar la materia: ' . mysqli_error($conn);
     }
-}
+
+?>
 
 // Verificar si se ha proporcionado un ID de materia válido en la URL
 if (isset($_GET['id'])) {
