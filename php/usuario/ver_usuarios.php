@@ -38,7 +38,7 @@ $result = mysqli_query($conn, $sql);
                             <td>' . $row['nombre_usuario'] . '</td>
                             <td>' . $row['usuario_usuario'] . '</td>
                             <td>
-                                <a href="editar_usuario.php?id=' . $row['id_usuario'] . '" class="btn btn-primary btn-sm">Actualizar</a>
+                                <a data-url = "editar_usuario.php ? id=' . $row['id_usuario'] . '" class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#myModal">Actualizar</a>
                                 <a href="eliminar_usuario.php?id=' . $row['id_usuario'] . '" class="btn btn-danger btn-sm">Eliminar</a>
                             </td>
                         </tr>
@@ -48,4 +48,19 @@ $result = mysqli_query($conn, $sql);
             ?>
         </table>
 </div>
+
+<!-- Estructura del Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php include('../pagina/footer.php'); ?>

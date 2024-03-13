@@ -1,5 +1,5 @@
 <?php
-include('conexion.php');
+include('../conexion.php');
 session_start();
 if (!isset($_SESSION['nombredelusuario'])) {
     header('location: ../../index.html');
@@ -41,7 +41,7 @@ if (isset($_POST['btncerrar'])) {
             /* Ajusta este valor según el espacio deseado entre los elementos */
         }
     </style>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 </head>
 
