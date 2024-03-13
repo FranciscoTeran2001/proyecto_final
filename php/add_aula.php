@@ -1,7 +1,7 @@
 <?php
 include("conexion.php");
 
-if(isset($_POST['add'])){
+if(isset($_POST["add"])){
     $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
     $capacidad = mysqli_real_escape_string($conn, $_POST["capacidad"]);
     $bloque = mysqli_real_escape_string($conn, $_POST["bloque"]);
@@ -28,12 +28,12 @@ if(isset($_POST['add'])){
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
         <div class="content">
             <h2>Datos del aula &raquo; Agregar datos</h2>
             <hr />
 
-            <form class="form-horizontal"  method="post">
+            <form class="form-horizontal" action="" method="post" id="miFormulario" >
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Nombre</label>
                     <div class="col-sm-4">
@@ -58,44 +58,14 @@ if(isset($_POST['add'])){
                 <div class="form-group">
                     <label class="col-sm-3 control-label">&nbsp;</label>
                     <div class="col-sm-6">
-                    <button type="button" id="guardarDatos" class="btn btn-sm btn-primary">Guardar datos</button>
-
-                        <a href="index.php" class="btn btn-sm btn-danger">Cancelar</a>
+                        <button type="submit" name="add" class="btn btn-sm btn-primary">Guardar datos</button> 
+                    
+                        <a href="ver_aula.php" class="btn btn-sm btn-danger">Cancelar</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <script>
-    $(document).ready(function() {
-        $('#guardarDatos').click(function() {
-            // Recolectar los datos del formulario
-            var formData = {
-                nombre: $('input[name=nombre]').val(),
-                capacidad: $('input[name=capacidad]').val(),
-                bloque: $('select[name=bloque]').val()
-            };
-
-            // Enviar los datos mediante AJAX
-            $.ajax({
-                type: 'POST',
-                url: 'add_aula.php',
-                data: formData,
-                success: function(response) {
-                    // Manejar la respuesta según sea necesario
-                    if (response.includes('correctamente')) {
-                        // Redirigir a la página de inicio u otro lugar
-                        window.location.href = 'principal.php';
-                    } else {
-                        // Manejar otros casos de respuesta
-                    }
-                }
-            });
-        });
-    });
-</script>
-
-
 
 </body>
 </html>

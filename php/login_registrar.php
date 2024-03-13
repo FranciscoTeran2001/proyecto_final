@@ -34,7 +34,8 @@ if(isset($_POST["btnregistrarx"]))
 
     if(mysqli_query($conn, $queryregistrar))
     {
-        echo "<script> alert('Usuario registrado: $usuario');window.location= 'principal.php' </script>";
+     
+       header("Location: ver_usuarios.php");
     }
     else 
     {

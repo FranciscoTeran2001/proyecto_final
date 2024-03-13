@@ -16,8 +16,6 @@ $result_novedades = mysqli_query($conn, $sql_novedades);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar Novedades</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/style_nav.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -57,9 +55,6 @@ $result_novedades = mysqli_query($conn, $sql_novedades);
             </tbody>
         </table>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
 
