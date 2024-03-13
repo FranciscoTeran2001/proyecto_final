@@ -62,5 +62,6 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
     </div>
+    
 
 <?php include('../pagina/footer.php'); ?>

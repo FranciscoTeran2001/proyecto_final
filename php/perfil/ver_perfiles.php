@@ -43,10 +43,10 @@ $result_perfiles = mysqli_query($conn, $sql_perfiles);
                         echo "<td>" . $row["atributos_perfil"] . "</td>";
                         echo "<td>" . $row["nombre_usuario"] . "</td>";
                         
-                        echo "<td>
-                                        <a href='actualizar_perfil.php?id=" . $row["id_perfil"] . "' class='btn btn-primary btn-sm'>Actualizar</a>
-                                        <a href='eliminar_perfil.php?id=" . $row["id_perfil"] . "' class='btn btn-danger btn-sm'>Eliminar</a>
-                                    </td>";
+                        echo '<td>
+                                    <a data-url= "actualizar_perfil.php?id=' . $row['id_perfil'] . '"class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Actualizar</a>
+                                    <a href="eliminar_perfil.php?id=' . $row['id_perfil'] . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                </td>';
                         echo "</tr>";
                     }
                 } else {
@@ -56,5 +56,20 @@ $result_perfiles = mysqli_query($conn, $sql_perfiles);
             </tbody>
         </table>
     </div>
+
+    <!-- Estructura del Modal -->
+<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <?php include('../pagina/footer.php'); ?>
