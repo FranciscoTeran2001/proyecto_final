@@ -12,13 +12,7 @@
              
                     <div class="form-group">
                         <label>Nombre del Docente</label>
-						 <select id="nombre_docente_input" class="form-control" required>
-                            <?php
-                            while($row_docente = mysqli_fetch_assoc($resultado_nombres_docentes)) {
-                                echo "<option value='{$row_docente['nombre_usuario']}'>{$row_docente['nombre_usuario']}</option>";
-                            }
-                            ?>
-                        </select>
+                        <input type="text" id="nombre_docente_input" class="form-control" placeholder="Nombre del Docente" required>
                     </div>
                     <div class="form-group">
                         <label>Cédula de Identidad</label>

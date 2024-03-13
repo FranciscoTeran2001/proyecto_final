@@ -20,23 +20,30 @@ $update_message = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $id_nrc = $_POST['id_nrc'];
-    $codigo_nrc = $_POST['codigo_nrc'];
+    $codigo_nrc = mysqli_real_escape_string($conn, $_POST['codigo_nrc']);
     $id_materia = $_POST['id_materia'];
     $id_docente = $_POST['id_docente'];
 
-    // Actualizar los datos del NRC en la base de datos
-    $sql = "UPDATE nrc 
-            SET codigo_nrc = '$codigo_nrc', 
-                id_materia = '$id_materia', 
-                id_docente = '$id_docente' 
-            WHERE id_nrc = $id_nrc";
-
-    if (mysqli_query($conn, $sql)) {
-        // Establecer el mensaje de actualización exitosa
-        $update_message = 'El NRC se ha actualizado correctamente.';
+    // Verificar si el código del NRC ya existe
+    $sql_check_nrc = "SELECT id_nrc FROM nrc WHERE codigo_nrc = '$codigo_nrc' AND id_nrc != $id_nrc";
+    $result_check_nrc = mysqli_query($conn, $sql_check_nrc);
+    if (mysqli_num_rows($result_check_nrc) > 0) {
+        $update_message = 'El código del NRC ya está en uso.';
     } else {
-        // Establecer el mensaje de error de actualización
-        $update_message = 'Error al actualizar el NRC: ' . mysqli_error($conn);
+        // Actualizar los datos del NRC en la base de datos
+        $sql = "UPDATE nrc 
+                SET codigo_nrc = '$codigo_nrc', 
+                    id_materia = '$id_materia', 
+                    id_docente = '$id_docente' 
+                WHERE id_nrc = $id_nrc";
+
+        if (mysqli_query($conn, $sql)) {
+            // Establecer el mensaje de actualización exitosa
+            $update_message = 'El NRC se ha actualizado correctamente.';
+        } else {
+            // Establecer el mensaje de error de actualización
+            $update_message = 'Error al actualizar el NRC: ' . mysqli_error($conn);
+        }
     }
 }
 

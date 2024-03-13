@@ -19,6 +19,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $horas_materias = $_POST['horas_materias'];
     $id_carrera = $_POST['id_carrera'];
 
+    // Validar si la materia ya está registrada
+    $check_materia = mysqli_query($conn, "SELECT * FROM `materia` WHERE `nombre_materia` = '$nombre_materia' AND `id_materia` != '$id_materia'");
+    if (mysqli_num_rows($check_materia) > 0) {
+        echo "La materia ya está registrada.";
+        exit();
+    }
+
+    // Validar si el código de la materia ya está registrado
+    $check_codigo_materia = mysqli_query($conn, "SELECT * FROM `materia` WHERE `codigo_materia` = '$codigo_materia' AND `id_materia` != '$id_materia'");
+    if (mysqli_num_rows($check_codigo_materia) > 0) {
+        echo "El código de la materia ya está registrado.";
+        exit();
+    }
+
+    // Validar que solo se ingresen números en los créditos
+    if (!is_numeric($creditos_materia)) {
+        echo "Los créditos de la materia deben ser números.";
+        exit();
+    }
+
+    // Validar que solo se ingresen números en las horas de materia
+    if (!is_numeric($horas_materias)) {
+        echo "Las horas de la materia deben ser números.";
+        exit();
+    }
+
     // Actualizar los datos de la materia en la base de datos
     $sql = "UPDATE materia 
             SET nombre_materia = '$nombre_materia', 
@@ -120,4 +146,3 @@ if (isset($_GET['id'])) {
     </div>
 </body>
 </html>
-

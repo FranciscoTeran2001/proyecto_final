@@ -15,6 +15,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $especializacion_docente = $_POST['especializacion_docente'];
     $horas_clase_docente = $_POST['horas_clase_docente'];
 
+    // Validar cédula, correo electrónico, teléfono y horas de clase
+    if (!is_numeric($cedula_docente)) {
+        echo "La cédula debe contener solo números.";
+        exit();
+    }
+
+    if (!filter_var($correo_docente, FILTER_VALIDATE_EMAIL)) {
+        echo "El formato del correo electrónico es inválido.";
+        exit();
+    }
+
+    if (!is_numeric($telefono_docente)) {
+        echo "El teléfono debe contener solo números.";
+        exit();
+    }
+
+    if (!is_numeric($horas_clase_docente) || $horas_clase_docente <= 0 || strpos($horas_clase_docente, '.') !== false) {
+        echo "Las horas de clases deben ser números positivos enteros.";
+        exit();
+    }
+
     // Actualizar los datos del docente en la base de datos
     $sql = "UPDATE docente 
             SET 
@@ -88,7 +109,7 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
                 <label for="nombre_docente">Nombre:</label>
-    <input type="text" class="form-control" id="nombre_docente" name="nombre_docente" value="<?php echo $nombre_docente; ?>" readonly>
+                <input type="text" class="form-control" id="nombre_docente" name="nombre_docente" value="<?php echo $nombre_docente; ?>" readonly>
             </div>
             <div class="form-group">
                 <label for="cedula_docente">Cédula de Identidad:</label>
@@ -117,6 +138,3 @@ if (isset($_GET['id'])) {
     </div>
 </body>
 </html>
-
-
-
