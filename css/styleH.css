@@ -1,0 +1,31 @@
+.nrc {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.nrcs {
+    min-height: 100px;
+    border: 2px dashed #ccc;
+}
+
+.horario {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.horario th,
+.horario td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+.close-button {
+    cursor: pointer;
+    float: right;
+}

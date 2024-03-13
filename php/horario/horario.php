@@ -41,15 +41,14 @@
                                     die("Conexión fallida: " . $conn->connect_error);
                                 }
 
-                                // Consulta SQL para obtener los NRCs
-                                $sql = "SELECT id_nrc, codigo_nrc FROM nrc";
+                                // Consulta SQL para obtener los NRCs seguido de la materia a la que pertenecen
+                                $sql = "SELECT nrc.id_nrc, nrc.codigo_nrc, materia.nombre_materia, carrera.nombre_carrera FROM nrc INNER JOIN materia ON nrc.id_materia = materia.id_materia INNER JOIN carrera ON materia.id_carrera = carrera.id_carrera";
                                 $result = $conn->query($sql);
-
                                 // Verificar si hay resultados
                                 if ($result->num_rows > 0) {
                                     // Iterar sobre los resultados y mostrarlos en el campo de selección
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<option value='" . $row['id_nrc'] . "'>" . $row['codigo_nrc'] . "</option>";
+                                        echo "<option value='" . $row['id_nrc'] . "'>" . $row['codigo_nrc'] . " - " . $row['nombre_materia'] . " - " . $row['nombre_carrera'] . "</option>";
                                     }
                                 } else {
                                     echo "<option value=''>No hay NRCs disponibles</option>";
@@ -100,14 +99,14 @@
                                     }
 
                                     // Consulta SQL para obtener las aulas
-                                    $sql = "SELECT id_aula, nombre_aula FROM aula";
+                                    $sql = "SELECT id_aula, nombre_aula, bloque_aula FROM aula";
                                     $result = $conn->query($sql);
 
                                     // Verificar si hay resultados
                                     if ($result->num_rows > 0) {
                                         // Iterar sobre los resultados y mostrarlos en el campo de selección
                                         while ($row = $result->fetch_assoc()) {
-                                            echo "<option value='" . $row['id_aula'] . "'>" . $row['nombre_aula'] . "</option>";
+                                            echo "<option value='" . $row['id_aula'] . "'>" . $row['bloque_aula'] . $row['nombre_aula'] . "</option>";
                                         }
                                     } else {
                                         echo "<option value=''>No hay aulas disponibles</option>";
@@ -125,14 +124,14 @@
 
                                     include("conexion.php");
                                     // Consulta SQL para obtener los periodos
-                                    $sql = "SELECT id_periodo, fecha_inicio, fecha_final FROM periodo";
+                                    $sql = "SELECT id_periodo, fecha_inicio, fecha_final, nombre_periodo FROM periodo";
                                     $result = $conn->query($sql);
 
                                     // Verificar si hay resultados
                                     if ($result->num_rows > 0) {
                                         // Iterar sobre los resultados y mostrarlos en el campo de selección
                                         while ($row = $result->fetch_assoc()) {
-                                            echo "<option value='" . $row['id_periodo'] . "'>" . $row['fecha_inicio'] . " - " . $row['fecha_final'] . "</option>";
+                                            echo "<option value='" . $row['id_periodo'] . "'>" . $row['nombre_periodo'] . " - " . $row['fecha_inicio'] . " - " . $row['fecha_final'] . "</option>";
                                         }
                                     } else {
                                         echo "<option value=''>No hay periodos disponibles</option>";
