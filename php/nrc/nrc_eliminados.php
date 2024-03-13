@@ -1,13 +1,13 @@
 <?php
 include("../conexion.php");
 
-// Consulta para obtener los NRCs con el nombre de la materia, nombre de la carrera y nombre del docente
+// Consulta para obtener los NRCs eliminados (estado_nrc = 0)
 $sql = "SELECT n.id_nrc, n.codigo_nrc, m.nombre_materia, c.nombre_carrera, d.nombre_docente, d.estado_docente
         FROM nrc n 
         INNER JOIN materia m ON n.id_materia = m.id_materia 
         INNER JOIN carrera c ON m.id_carrera = c.id_carrera 
         INNER JOIN docente d ON n.id_docente = d.id_docente 
-        WHERE n.estado_nrc = 1";
+        WHERE n.estado_nrc = 0";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -17,13 +17,14 @@ $result = mysqli_query($conn, $sql);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Visualizar NRC</title>
+    <title>Visualizar NRC Eliminados</title>
 </head>
+
 <?php include('../pagina/header.php'); ?>
 
 <div class="col py-3">  
     <div class="container">
-        <h2>Visualizar NRC</h2>
+        <h2>Visualizar NRC Eliminados</h2>
         <hr />
 
         <table class="table table-striped table-hover">
@@ -36,7 +37,7 @@ $result = mysqli_query($conn, $sql);
             </tr>
             <?php
             if(mysqli_num_rows($result) == 0){
-                echo '<tr><td colspan="5">No hay datos.</td></tr>';
+                echo '<tr><td colspan="5">No hay NRCs eliminados.</td></tr>';
             }else{
                 while($row = mysqli_fetch_assoc($result)){
                     echo '<tr>';
@@ -49,10 +50,7 @@ $result = mysqli_query($conn, $sql);
                     } else {
                         echo '<td>Docente no disponible</td>';
                     }
-                    echo '<td><a data-url="editar_nrc.php?id='.$row['id_nrc'].'" class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Editar</a>
-                    <a href="eliminar_nrc.php?id='.$row['id_nrc'].'" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>';
-                    
+                    echo '<td><a href="restaurar_nrc.php?id='.$row['id_nrc'].'" class="btn btn-success btn-sm">Restaurar</a></td>';
                     echo '</tr>';
                 }
             }
@@ -60,21 +58,4 @@ $result = mysqli_query($conn, $sql);
         </table>
     </div>
 </div>
-
-<!-- Estructura del Modal -->
-<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-</div>
-
-
 <?php include('../pagina/footer.php'); ?>
-
