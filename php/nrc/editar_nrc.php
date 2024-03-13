@@ -13,32 +13,7 @@ $sql_docentes = "SELECT id_docente, nombre_docente FROM docente WHERE estado_doc
 $result_docentes = mysqli_query($conn, $sql_docentes);
 $docentes = mysqli_fetch_all($result_docentes, MYSQLI_ASSOC);
 
-// Definir una variable para almacenar el mensaje de actualización
-$update_message = '';
 
-// Verificar si se ha enviado el formulario de actualización
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $id_nrc = $_POST['id_nrc'];
-    $codigo_nrc = $_POST['codigo_nrc'];
-    $id_materia = $_POST['id_materia'];
-    $id_docente = $_POST['id_docente'];
-
-    // Actualizar los datos del NRC en la base de datos
-    $sql = "UPDATE nrc 
-            SET codigo_nrc = '$codigo_nrc', 
-                id_materia = '$id_materia', 
-                id_docente = '$id_docente' 
-            WHERE id_nrc = $id_nrc";
-
-    if (mysqli_query($conn, $sql)) {
-        // Establecer el mensaje de actualización exitosa
-        $update_message = 'El NRC se ha actualizado correctamente.';
-    } else {
-        // Establecer el mensaje de error de actualización
-        $update_message = 'Error al actualizar el NRC: ' . mysqli_error($conn);
-    }
-}
 
 // Verificar si se ha proporcionado un ID de NRC válido en la URL
 if (isset($_GET['id'])) {
@@ -65,16 +40,6 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar NRC</title>
-
-</head>
-<body>
-
     <div class="container">
         <h2>Editar NRC</h2>
         <hr />
@@ -87,7 +52,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de NRC -->
-        <form method="post" action="">
+        <form method="post" action="update_nrc.php">
             <input type="hidden" name="id_nrc" value="<?php echo $id_nrc; ?>">
 
             <div class="form-group">
@@ -116,8 +81,6 @@ if (isset($_GET['id'])) {
             </div>
 
             <button type="submit" class="btn btn-primary">Actualizar NRC</button>
-            <a href="ver_nrc.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>
+

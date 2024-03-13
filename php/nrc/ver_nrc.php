@@ -49,12 +49,29 @@ $result = mysqli_query($conn, $sql);
                     } else {
                         echo '<td>Docente no disponible</td>';
                     }
-                    echo '<td><a href="editar_nrc.php?id='.$row['id_nrc'].'" class="btn btn-primary btn-sm">Editar</a></td>';
+                    echo '<td><a data-url="editar_nrc.php?id='.$row['id_nrc'].'" class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Editar</a></td>';
                     echo '</tr>';
                 }
             }
             ?>
         </table>
     </div>
+</div>
+
+<!-- Estructura del Modal -->
+<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+
 <?php include('../pagina/footer.php'); ?>
 

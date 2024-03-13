@@ -21,8 +21,7 @@ $result_novedades = mysqli_query($conn, $sql_novedades);
 <div class="col py-3">
     <div class="container">
         <h2>Visualizar Novedades</h2>
-        <hr />
-
+        <hr/>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -46,14 +45,28 @@ $result_novedades = mysqli_query($conn, $sql_novedades);
                     echo "<td>{$row['nombre_usuario']}</td>"; // Mostrar el nombre de usuario en lugar del ID
                     echo "<td>{$row['nombre_aula']}</td>";
                     // Agregar un enlace para editar la novedad
-                    echo "<td><a href='editar_novedad.php?id={$row['id_novedad']}' class='btn btn-primary btn-sm'>Editar</a>
-                    <a href='eliminar_novedad.php?id={$row['id_novedad']}' class='btn btn-danger btn-sm'>eliminar</a>
+                    echo '<td><a data-url="editar_novedad.php?id= '.$row['id_novedad'].'"class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Editar</a>
+                    <a href="eliminar_novedad.php?id='.$row['id_novedad'].' "class="btn btn-danger btn-sm" >eliminar</a>
                     </td>";
-                    echo "</tr>";
+                    echo "</tr>';
                 }
                 ?>
             </tbody>
         </table>
+    </div>
+</div>
+<!-- Estructura del Modal -->
+<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
     </div>
     <?php include('../pagina/footer.php'); ?>
 
