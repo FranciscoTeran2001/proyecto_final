@@ -1,5 +1,5 @@
 <?php
-include('conexion.php');
+include('../conexion.php');
 session_start();
 if (!isset($_SESSION['nombredelusuario'])) {
     header('location: ../../index.html');

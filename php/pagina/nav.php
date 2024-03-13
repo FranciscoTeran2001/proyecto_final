@@ -21,7 +21,10 @@
                             <a href="../perfil/ver_perfiles.php" class="nav-link px-0">Ver perfiles</a>
                         </li>
                         <li>
-                            <a href="../usuario/usuarios_eliminados.php" class="nav-link px-0">lista de eliminados</a>
+                            <a href="../usuario/usuarios_eliminados.php" class="nav-link px-0">lista de usuarios eliminados</a>
+                        </li>
+                        <li>
+                            <a href="../perfil/perfiles_eliminados.php" class="nav-link px-0">lista de perfiles eliminados</a>
                         </li>
                     
                     </ul>
@@ -34,10 +37,7 @@
                             <a href="../docente/ver_docente.php" class="nav-link px-0">ver docentes</a>
                         </li>
                         <li>
-                            <a href="../perfil/ver_perfiles.php" class="nav-link px-0">Ver perfiles</a>
-                        </li>
-                        <li>
-                            <a href="../usuario/usuarios_eliminados.php" class="nav-link px-0">lista de eliminados</a>
+                            <a href="../docente/docentes_eliminados.php" class="nav-link px-0">lista de eliminados</a>
                         </li>
                     </ul>
                 </li>
@@ -61,6 +61,9 @@
                         <li class="w-100">
                             <a href="../novedad/ver_registros_novedad.php" class="nav-link px-0">Ver registros</a>
                         </li>
+                        <li class="w-100">
+                            <a href="../novedad/novedades_eliminados.php" class="nav-link px-0">Novedades eliminados</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -72,6 +75,9 @@
                         </li>
                         <li class="w-100">
                             <a href="../materia/ver_materias.php" class="nav-link px-0">Ver materias</a>
+                        </li>
+                        <li class="w-100">
+                            <a href="../materia/materias_eliminadas.php" class="nav-link px-0">Materias eliminadas</a>
                         </li>
                         <li class="w-100">
                             <a href="../carrera/carreras_eliminadas.php" class="nav-link px-0">Carreras eliminadas</a>
