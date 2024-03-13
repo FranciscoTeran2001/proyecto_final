@@ -99,7 +99,7 @@ function dragLeave() {
 }
 
 function drop() {
-    // Create a new div for the dropped NRC and set its content to the dragged NRC
+    // Create a new div for the dropped NRC 
     const nrcDiv = document.createElement('div');
     nrcDiv.classList.add('nrc');
     nrcDiv.setAttribute('draggable', 'true');

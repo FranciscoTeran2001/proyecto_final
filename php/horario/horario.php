@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drag and Drop Horario</title>
-	
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="../css/styleH.css" rel="stylesheet" type="text/css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="../../css/styleH.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
 
-<body >
-    <nav >
+<body>
+    <nav>
         <?php include('nav.php'); ?>
     </nav>
     <h2>Creación de Horario</h2>
@@ -83,6 +86,7 @@
                             <div class="form-group col-md-6">
                                 <label for="aulaSelect">Seleccionar Aula:</label>
                                 <select class="form-control" id="aulaSelect" name="aulaSelect">
+                                    <option value="" selected disabled>Seleccionar Aula</option>
                                     <?php
                                     // Establecer la conexión a la base de datos
                                     $servername = "localhost";
@@ -120,6 +124,7 @@
                             <div class="form-group col-md-6">
                                 <label for="periodoSelect">Seleccionar Periodo:</label>
                                 <select class="form-control" id="periodoSelect" name="periodoSelect">
+                                    <option value="" selected disabled>Seleccionar Periodo</option>
                                     <?php
 
                                     include("conexion.php");
@@ -230,7 +235,7 @@
         <br><br>
     </div>
 
-    <script src="../js/scriptHorario.js">
+    <script src="../../js/scriptHorario.js">
     </script>
 
 
