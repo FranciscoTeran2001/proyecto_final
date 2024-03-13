@@ -1,8 +1,6 @@
 <?php
 include("../conexion.php");
 
-// Definir una variable para almacenar el mensaje de actualización
-$update_message = '';
 
 // Verificar si se ha enviado el formulario de actualización
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -54,15 +52,6 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Carrera</title>
-</head>
-<body>
     <div class="container">
         <h2>Editar Carrera</h2>
         <hr />
@@ -72,8 +61,9 @@ if (isset($_GET['id'])) {
                 <?php echo $update_message; ?>
             </div>
         <?php } ?>
-
-        <form method="post" action="">
+        
+        <!-- Formulario de edición de carrera -->
+        <form method="post" action="update_carrera.php">
             <input type="hidden" name="id_carrera" value="<?php echo $id_carrera; ?>">
             <div class="form-group">
                 <label for="nombre_carrera">Nombre Carrera:</label>
@@ -81,8 +71,6 @@ if (isset($_GET['id'])) {
             </div>
 
             <button type="submit" class="btn btn-primary">Actualizar Carrera</button>
-            <a href="ver_carreras.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>
+

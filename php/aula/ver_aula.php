@@ -44,8 +44,8 @@ $result = mysqli_query($conn, $sql);
                             echo '<td>' . $row['capacidad_aula'] . '</td>';
                             echo '<td>' . $row['bloque_aula'] . '</td>';
                             echo '<td>
-                                    <a href="editar_aula.php?id=' . $row['id_aula'] . '" class="btn btn-primary btn-sm">Editar</a>
-                                    <a href="eliminar_aula.php?id=' . $row['id_aula'] . '" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a data-url = "editar_aula.php ? id=' . $row['id_aula'] . '" class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Actualizar</a>
+                            <a href="eliminar_aula.php?id=' . $row['id_aula'] . '" class="btn btn-danger btn-sm">Eliminar</a>
                                  </td>';
                             echo '</tr>';
                         }
@@ -53,6 +53,19 @@ $result = mysqli_query($conn, $sql);
                     ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <!-- Estructura del Modal -->
+    <div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
 

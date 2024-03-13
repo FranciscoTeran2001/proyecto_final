@@ -1,34 +1,7 @@
 <?php
 include("../conexion.php");
 date_default_timezone_set('America/Guayaquil');
-// Definir una variable para almacenar el mensaje de actualización
-$update_message = '';
 
-// Verificar si se ha enviado el formulario de actualización
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
-    $id_novedad = $_POST['id_novedad'];
-    $descripcion_novedad = mysqli_real_escape_string($conn, $_POST['descripcion_novedad']);
-    $fecha_edicion_novedad = date("Y-m-d H:i:s"); // Obtener la fecha y hora actual en el formato MySQL
-    $id_usuario = mysqli_real_escape_string($conn, $_POST['id_usuario']);
-    $id_aula = mysqli_real_escape_string($conn, $_POST['id_aula']);
-
-    // Actualizar los datos de la novedad en la base de datos
-    $sql = "UPDATE registro_novedades 
-            SET descripcion_novedad = '$descripcion_novedad', 
-                fecha_edicion_novedad = '$fecha_edicion_novedad', 
-                id_usuario = '$id_usuario', 
-                id_aula = '$id_aula' 
-            WHERE id_novedad = $id_novedad";
-
-    if (mysqli_query($conn, $sql)) {
-        // Establecer el mensaje de actualización exitosa
-        $update_message = 'La novedad se ha actualizado correctamente.';
-    } else {
-        // Establecer el mensaje de error de actualización
-        $update_message = 'Error al actualizar la novedad: ' . mysqli_error($conn);
-    }
-}
 
 // Verificar si se ha proporcionado un ID de novedad válido en la URL
 if (isset($_GET['id'])) {
@@ -57,14 +30,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Novedad</title>
-</head>
-<body>
+
     <div class="container">
         <h2>Editar Novedad</h2>
         <hr />
@@ -76,7 +42,7 @@ if (isset($_GET['id'])) {
             </div>
         <?php } ?>
 
-        <form method="post" action="">
+        <form method="post" action="update_novedad.php">
             <input type="hidden" name="id_novedad" value="<?php echo $id_novedad; ?>">
 
             <div class="form-group">
@@ -110,8 +76,23 @@ if (isset($_GET['id'])) {
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Actualizar Novedad</button>
-            <a href="ver_registros_novedad.php" class="btn btn-default">Volver</a>
         </form>
     </div>
 </body>
 </html>
+
+<!-- Estructura del Modal -->
+<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+

@@ -13,8 +13,6 @@ $sql_docentes = "SELECT id_docente, nombre_docente FROM docente WHERE estado_doc
 $result_docentes = mysqli_query($conn, $sql_docentes);
 $docentes = mysqli_fetch_all($result_docentes, MYSQLI_ASSOC);
 
-// Definir una variable para almacenar el mensaje de actualización
-$update_message = '';
 
 // Verificar si se ha enviado el formulario de actualización
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -72,16 +70,6 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar NRC</title>
-
-</head>
-<body>
-
     <div class="container">
         <h2>Editar NRC</h2>
         <hr />
@@ -94,7 +82,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de NRC -->
-        <form method="post" action="">
+        <form method="post" action="update_nrc.php">
             <input type="hidden" name="id_nrc" value="<?php echo $id_nrc; ?>">
 
             <div class="form-group">
@@ -123,8 +111,6 @@ if (isset($_GET['id'])) {
             </div>
 
             <button type="submit" class="btn btn-primary">Actualizar NRC</button>
-            <a href="ver_nrc.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>
+

@@ -4,9 +4,7 @@ include("../conexion.php");
 //filtrar solo los que tengan estado 1 y mostrar
 $sql = "SELECT * FROM docente WHERE estado_docente=1 ORDER BY id_docente";
 $result = mysqli_query($conn, $sql);
-//filtrar solo los que son docentes
-$query_nombres_docentes = "SELECT usuario.nombre_usuario, usuario.id_usuario FROM usuario INNER JOIN perfil ON usuario.id_usuario = perfil.id_usuario WHERE perfil.tipo_perfil = 'docente'";
-$resultado_nombres_docentes = mysqli_query($conn, $query_nombres_docentes);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,7 +53,7 @@ $resultado_nombres_docentes = mysqli_query($conn, $query_nombres_docentes);
                             <td>' . $row['especializacion_docente'] . '</td>
                             <td>' . $row['horas_clase_docente'] . '</td>
                             <td>
-                            <a href="editar_docente.php?id='. $row['id_docente'] . '" class="btn btn-primary btn-sm">Editar</a>
+                            <a data-url = "editar_docente.php ? id=' . $row['id_docente'] . '" class="btn btn-primary btn-sm load-modal-content" data-bs-toggle="modal" data-bs-target="#forModal">Actualizar</a>
                                 <a href="eliminar_docente.php?id='. $row['id_docente'] . '" class="btn btn-danger btn-sm">Eliminar</a> </td>
                         </tr>
                         ';
@@ -64,4 +62,18 @@ $resultado_nombres_docentes = mysqli_query($conn, $query_nombres_docentes);
         }
         ?>
     </table>
+
+    <!-- Estructura del Modal -->
+<div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+</div>
     <?php include('../pagina/footer.php'); ?>

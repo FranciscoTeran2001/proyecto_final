@@ -58,14 +58,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Periodo</title>
-</head>
-<body>
+
     <div class="container">
         <h2>Editar Periodo</h2>
         <hr />
@@ -94,5 +87,4 @@ if (isset($_GET['id'])) {
             <a href="ver_periodo.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>
+

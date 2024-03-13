@@ -83,15 +83,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Docente</title>
 
-</head>
-<body>
     <div class="container">
         <h2>Editar Docente</h2>
         <hr />
@@ -104,12 +96,12 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de docente -->
-        <form method="post" action="">
+        <form method="post" action="actualizar_tabla_docente.php">
             <input type="hidden" name="id_docente" value="<?php echo $id_docente; ?>">
 
             <div class="form-group">
                 <label for="nombre_docente">Nombre:</label>
-                <input type="text" class="form-control" id="nombre_docente" name="nombre_docente" value="<?php echo $nombre_docente; ?>" readonly>
+    <input type="text" class="form-control" id="nombre_docente" name="nombre_docente" value="<?php echo $nombre_docente; ?>" required>
             </div>
             <div class="form-group">
                 <label for="cedula_docente">Cédula de Identidad:</label>
@@ -136,5 +128,6 @@ if (isset($_GET['id'])) {
             <a href="ver_docente.php" class="btn btn-default">Volver</a>
         </form>
     </div>
-</body>
-</html>
+
+
+

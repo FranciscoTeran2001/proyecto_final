@@ -1,7 +1,6 @@
 <?php
 include("../conexion.php");
 
-// Establecer la zona horaria a Guayaquil
 date_default_timezone_set('America/Guayaquil');
 
 // Definir una variable para almacenar el mensaje de actualización
@@ -64,15 +63,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Aula</title>
-</head>
-<body>
+
     <div class="container">
         <h2>Editar Aula</h2>
         <hr />
@@ -85,7 +76,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de aula -->
-        <form method="post" action="" onsubmit="return validateaulaeditar()">
+        <form method="post" action="update_aula.php" onsubmit="return validateaulaeditar()">
             <input type="hidden" name="id_aula" value="<?php echo $id_aula; ?>">
 
             <div class="form-group">
@@ -103,9 +94,7 @@ if (isset($_GET['id'])) {
                     <option value="G" <?php if ($bloque == 'G') echo 'selected'; ?>>G</option>
                 </select>
             </div>
-
             <button type="submit" class="btn btn-primary">Actualizar Aula</button>
-            <a href="ver_aula.php" class="btn btn-default">Volver</a>
         </form>
     </div>
 
