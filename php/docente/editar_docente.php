@@ -4,6 +4,56 @@ include("../conexion.php");
 // Definir una variable para almacenar el mensaje de actualización
 $update_message = '';
 
+// Verificar si se ha enviado el formulario de actualización
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtener los datos del formulario
+    $id_docente = $_POST['id_docente'];
+    $nombre_docente = $_POST['nombre_docente'];
+    $cedula_docente = $_POST['cedula_docente'];
+    $correo_docente = $_POST['correo_docente'];
+    $telefono_docente = $_POST['telefono_docente'];
+    $especializacion_docente = $_POST['especializacion_docente'];
+    $horas_clase_docente = $_POST['horas_clase_docente'];
+
+    // Validar cédula, correo electrónico, teléfono y horas de clase
+    if (!is_numeric($cedula_docente)) {
+        echo "La cédula debe contener solo números.";
+        exit();
+    }
+
+    if (!filter_var($correo_docente, FILTER_VALIDATE_EMAIL)) {
+        echo "El formato del correo electrónico es inválido.";
+        exit();
+    }
+
+    if (!is_numeric($telefono_docente)) {
+        echo "El teléfono debe contener solo números.";
+        exit();
+    }
+
+    if (!is_numeric($horas_clase_docente) || $horas_clase_docente <= 0 || strpos($horas_clase_docente, '.') !== false) {
+        echo "Las horas de clases deben ser números positivos enteros.";
+        exit();
+    }
+
+    // Actualizar los datos del docente en la base de datos
+    $sql = "UPDATE docente 
+            SET 
+                cedula_docente = '$cedula_docente', 
+                correo_docente = '$correo_docente', 
+                telefono_docente = '$telefono_docente', 
+                especializacion_docente = '$especializacion_docente',
+                horas_clase_docente = '$horas_clase_docente' 
+            WHERE id_docente = $id_docente";
+
+    if (mysqli_query($conn, $sql)) {
+        // Establecer el mensaje de actualización exitosa
+        $update_message = 'El docente se ha actualizado correctamente.';
+    } else {
+        // Establecer el mensaje de error de actualización
+        $update_message = 'Error al actualizar el docente: ' . mysqli_error($conn);
+    }
+}
 
 // Verificar si se ha proporcionado un ID de docente válido en la URL
 if (isset($_GET['id'])) {

@@ -78,6 +78,8 @@ if (isset($_GET['id'])) {
             <button type="submit" class="btn btn-primary">Actualizar Novedad</button>
         </form>
     </div>
+</body>
+</html>
 
 <!-- Estructura del Modal -->
 <div class="modal fade" id="forModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

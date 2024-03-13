@@ -19,13 +19,17 @@ if(isset($_POST['add'])){
     $id_usuario = mysqli_real_escape_string($conn, $_POST["id_usuario"]); // Suponiendo que obtienes esto de algún lugar
     $id_aula = mysqli_real_escape_string($conn, $_POST["id_aula"]); // Suponiendo que obtienes esto de algún lugar
     
-    $insert = mysqli_query($conn, "INSERT INTO `registro_novedades`( `descripcion_novedad`, `fecha_creacion_novedad`, `fecha_edicion_novedad`, `estado_novedad`, `id_usuario`, `id_aula`)
-                    VALUES('$descripcion', '$fecha_creacion', '$fecha_creacion', '$estado', '$id_usuario', '$id_aula')");
+    if(empty($descripcion) || empty($id_usuario) || empty($id_aula)){
+        echo '<br><br><br><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Todos los campos son obligatorios.</div>';
+    } else {
+        $insert = mysqli_query($conn, "INSERT INTO `registro_novedades`( `descripcion_novedad`, `fecha_creacion_novedad`, `fecha_edicion_novedad`, `estado_novedad`, `id_usuario`, `id_aula`)
+                        VALUES('$descripcion', '$fecha_creacion', '$fecha_creacion', '$estado', '$id_usuario', '$id_aula')");
 
-    if($insert){
-        echo '<br><br><br><div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>¡Novedad registrada correctamente!</div>';
-    }else{
-        echo '<br><br><br><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error al registrar la novedad.</div>';
+        if($insert){
+            echo '<br><br><br><div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>¡Novedad registrada correctamente!</div>';
+        }else{
+            echo '<br><br><br><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error al registrar la novedad.</div>';
+        }
     }
 }
 ?>
@@ -92,5 +96,3 @@ if(isset($_POST['add'])){
     </div>
 </body>
 </html>
-
-

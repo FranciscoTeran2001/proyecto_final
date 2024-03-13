@@ -2,14 +2,32 @@
 include("../conexion.php");
 
 if(isset($_POST['add'])){
+    // Verificar si se han seleccionado atributos para el perfil
+    if(!isset($_POST["atributos_perfil"]) || empty($_POST["atributos_perfil"])) {
+        // Mostrar un mensaje de error si no se han seleccionado atributos
+        echo "<script> alert('Debe seleccionar al menos un atributo para el perfil.');window.location= 'add_perfil.php' </script>";
+        exit(); // Detener la ejecución del script
+    }
+
+    // Obtener los datos del formulario
     $tipo_perfil = mysqli_real_escape_string($conn, $_POST["tipo_perfil"]);
     $atributos_perfil = implode(", ", $_POST["atributos_perfil"]); // Convertimos el array de atributos a una cadena separada por comas
     $id_usuario = mysqli_real_escape_string($conn, $_POST["id_usuario"]);
     
+    // Verificar si el usuario ya tiene un perfil registrado
+    $check_user_query = "SELECT * FROM perfil WHERE id_usuario = '$id_usuario'";
+    $check_result = mysqli_query($conn, $check_user_query);
+    if(mysqli_num_rows($check_result) > 0) {
+        // Mostrar un mensaje de error si el usuario ya tiene un perfil registrado
+        echo "<script> alert('El usuario ya tiene un perfil registrado.');window.location= 'add_perfil.php' </script>";
+        exit(); // Detener la ejecución del script
+    }
+
+    // Insertar el perfil en la base de datos
     $insert = mysqli_query($conn, "INSERT INTO perfil (tipo_perfil, atributos_perfil, id_usuario,estado_perfil) 
                                    VALUES ('$tipo_perfil', '$atributos_perfil', '$id_usuario',1)");
 
-     if($insert){
+    if($insert){
         // Alerta de éxito si la inserción es exitosa
         echo "<script> alert('El perfil se ha agregado correctamente');window.location= 'add_perfil.php' </script>";
     }else{
@@ -87,5 +105,3 @@ $result_usuarios = mysqli_query($conn, $query_usuarios);
     </div>
 </body>
 </html>
-
-

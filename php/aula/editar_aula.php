@@ -3,6 +3,41 @@ include("../conexion.php");
 
 date_default_timezone_set('America/Guayaquil');
 
+// Definir una variable para almacenar el mensaje de actualización
+$update_message = '';
+
+// Verificar si se ha enviado el formulario de actualización
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($nombre) && !empty($capacidad) && !empty($bloque)) {
+        $id_aula = $_POST['id_aula'];
+        $nombre = mysqli_real_escape_string($conn, $_POST["nombre"]);
+        $capacidad = mysqli_real_escape_string($conn, $_POST["capacidad"]);
+        $bloque = mysqli_real_escape_string($conn, $_POST["bloque"]);
+
+        if ($capacidad > 0) {
+            // Actualizar los datos del aula en la base de datos
+            $sql = "UPDATE aula 
+                    SET nombre_aula = '$nombre', 
+                        capacidad_aula = '$capacidad', 
+                        bloque_aula = '$bloque' 
+                    WHERE id_aula = $id_aula";
+
+            if (mysqli_query($conn, $sql)) {
+                // Establecer el mensaje de actualización exitosa
+                $update_message = 'El aula se ha actualizado correctamente.';
+            } else {
+                // Establecer el mensaje de error de actualización
+                $update_message = 'Error al actualizar el aula: ' . mysqli_error($conn);
+            }
+        } else {
+            $update_message = 'Error. La capacidad debe ser un número entero positivo.';
+        }
+    } else {
+        $update_message = 'Error. Todos los campos son obligatorios.';
+    }
+}
+
+
 // Verificar si se ha proporcionado un ID de aula válido en la URL
 if (isset($_GET['id'])) {
     // Obtener el ID del aula desde la URL
@@ -41,7 +76,7 @@ if (isset($_GET['id'])) {
         <?php } ?>
 
         <!-- Formulario de edición de aula -->
-        <form method="post" action="update_aula.php">
+        <form method="post" action="update_aula.php" onsubmit="return validateaulaeditar()">
             <input type="hidden" name="id_aula" value="<?php echo $id_aula; ?>">
 
             <div class="form-group">
@@ -62,3 +97,7 @@ if (isset($_GET['id'])) {
             <button type="submit" class="btn btn-primary">Actualizar Aula</button>
         </form>
     </div>
+
+    <script src="../../js/validaciones.js"></script>
+</body>
+</html>
